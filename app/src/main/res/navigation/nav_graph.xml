@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.moneam.weatherphoto.HomeFragment"
+        android:name="com.moneam.weatherphoto.feature.list.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_first" />
 
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.moneam.weatherphoto.PhotoFragment"
+        android:name="com.moneam.weatherphoto.feature.photo.PhotoFragment"
         android:label="@string/title_photo"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_photo" />
 </navigation>

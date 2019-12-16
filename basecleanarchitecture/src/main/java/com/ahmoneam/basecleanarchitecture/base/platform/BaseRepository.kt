@@ -3,13 +3,11 @@ package com.ahmoneam.basecleanarchitecture.base.platform
 import com.ahmoneam.basecleanarchitecture.R
 import com.ahmoneam.basecleanarchitecture.Result
 import com.ahmoneam.basecleanarchitecture.base.data.local.LocalDataSource
-import com.ahmoneam.basecleanarchitecture.base.data.model.BaseResponse
 import com.ahmoneam.basecleanarchitecture.base.data.remote.RemoteDataSource
 import com.ahmoneam.basecleanarchitecture.utils.ApplicationException
 import com.ahmoneam.basecleanarchitecture.utils.ErrorType
 import com.ahmoneam.basecleanarchitecture.utils.IConnectivityUtils
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,6 +23,12 @@ abstract class BaseRepository<LocalData : LocalDataSource, RemoteData : RemoteDa
     private val noInternetError = Result.Error(
         ApplicationException(
             type = ErrorType.Network.NoInternetConnection,
+            errorMessageRes = R.string.error_no_internet_connection
+        )
+    )
+    val unexpectedError = Result.Error(
+        ApplicationException(
+            type = ErrorType.Network.Unexpected,
             errorMessageRes = R.string.error_no_internet_connection
         )
     )
@@ -64,7 +68,7 @@ abstract class BaseRepository<LocalData : LocalDataSource, RemoteData : RemoteDa
         }
     }
 
-    private fun unexpectedError(error: Throwable): Result.Error {
+    fun unexpectedError(error: Throwable): Result.Error {
         return Result.Error(
             ApplicationException(
                 throwable = error,
@@ -79,28 +83,21 @@ abstract class BaseRepository<LocalData : LocalDataSource, RemoteData : RemoteDa
             401 -> Result.Error(
                 ApplicationException(
                     type = ErrorType.Network.Unauthorized,
-                    errorMessage = getErrorMessage(response)
+                    errorMessage = "Unauthorized"
                 )
             )
             404 -> Result.Error(
                 ApplicationException(
                     type = ErrorType.Network.ResourceNotFound,
-                    errorMessage = getErrorMessage(response)
+                    errorMessage = "ResourceNotFound"
                 )
             )
             else -> Result.Error(
                 ApplicationException(
                     type = ErrorType.Network.Unexpected,
-                    errorMessage = getErrorMessage(response)
+                    errorMessage = "Unexpected"
                 )
             )
         }
-    }
-
-    private fun <T> getErrorMessage(response: Response<T>): String? {
-        return gson.fromJson<BaseResponse<*>>(
-            response.errorBody()?.string(),
-            object : TypeToken<BaseResponse<*>>() {}.type
-        ).error.message
     }
 }
