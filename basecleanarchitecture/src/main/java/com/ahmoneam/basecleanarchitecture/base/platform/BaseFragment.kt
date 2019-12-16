@@ -4,24 +4,18 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelStoreOwner
 import com.ahmoneam.basecleanarchitecture.Result
 import com.ahmoneam.basecleanarchitecture.utils.EventObserver
 import com.tapadoo.alerter.Alerter
-import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
-import java.lang.ref.WeakReference
 import java.lang.reflect.ParameterizedType
 import kotlin.reflect.KClass
 
 abstract class BaseFragment<ViewModel : BaseViewModel>
     : Fragment() {
 
-    open val viewModel: ViewModel by lazy { getSharedViewModel(viewModelClass(), from = getFrom()) }
-
-    open fun getFrom(): () -> ViewModelStoreOwner = { activity as ViewModelStoreOwner }
-
-    val sharedViewModels = mutableListOf<WeakReference<BaseViewModel>>()
+    open val viewModel: ViewModel by lazy { getViewModel(viewModelClass()) }
 
     @Suppress("UNCHECKED_CAST")
     private fun viewModelClass(): KClass<ViewModel> {
@@ -39,15 +33,6 @@ abstract class BaseFragment<ViewModel : BaseViewModel>
         initLoading(viewModel)
         initError(viewModel)
         initNavigation(viewModel)
-        sharedViewModels
-            .asSequence()
-            .filter { it.get() != null }
-            .map { it.get()!! }
-            .forEach {
-                initLoading(it)
-                initError(it)
-                initNavigation(it)
-            }
     }
 
     private fun initNavigation(vm: BaseViewModel) {
