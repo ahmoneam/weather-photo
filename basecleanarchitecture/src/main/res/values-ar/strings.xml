@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_email_invalid">الرجاء إدخال إيميل صحيح</string>
+    <string name="error_required">هناك حقل إلزامي</string>
+    <string name="error_phone_invalid">الرجاء إدخال رقم جوال سعودي صحيح</string>
+    <string name="error_password_invalid">تم إدخال رقم سري ضعيف، الرجاء إدخال على الأقل ٨ عناصر يتضمنهم على الأقل رقم و حرف.</string>
+    <string name="error_confirm_password_mismatch">الرقم السري غير متطابق، الرجاء إعادة إدخال الرقم السري بحذر</string>
+    <string name="error_no_internet_connection">نأسف لا يوجد اتصال بالإنترنت</string>
+    <string name="error_name_invalid">الاسم الخاص بك قصير جداً، الرجاء تعديله</string>
+</resources>

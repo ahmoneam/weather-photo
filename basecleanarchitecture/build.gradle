@@ -1,0 +1,105 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = 1.8
+    }
+    dataBinding {
+        enabled = true
+    }
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.returnDefaultValues = true
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // google
+    api 'com.google.android.material:material:1.2.0-alpha02'
+
+    // Androidx
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.core:core-ktx:1.1.0'
+    api "androidx.transition:transition:1.2.0"
+
+    // view model
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03'
+
+    // Json Parser
+    api 'com.google.code.gson:gson:2.8.6'
+
+    // navigation
+    api "androidx.navigation:navigation-fragment-ktx:2.1.0"
+    api 'androidx.navigation:navigation-fragment:2.1.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.1.0'
+    api 'androidx.navigation:navigation-ui:2.1.0'
+
+    // Network
+    api 'com.squareup.okhttp3:okhttp:4.2.2'
+    api 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    api 'com.squareup.retrofit2:retrofit:2.6.2'
+    api 'com.squareup.retrofit2:converter-gson:2.6.2'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+
+    // JWT
+    api 'com.auth0.android:jwtdecode:1.4.0'
+
+    // Dependency Injection Koin
+    api 'org.koin:koin-core:2.0.1'
+    api "org.koin:koin-android:2.0.1"
+    api "org.koin:koin-androidx-ext:2.0.1"
+    api "org.koin:koin-androidx-scope:2.0.1"
+    api "org.koin:koin-androidx-viewmodel:2.0.1"
+
+    // Logging
+    api 'com.jakewharton.timber:timber:4.7.1'
+    api 'com.orhanobut:logger:2.2.0'
+
+    // lib phone number
+    api 'com.googlecode.libphonenumber:libphonenumber:8.10.23'
+
+    // alerter
+    api 'com.tapadoo.android:alerter:5.0.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

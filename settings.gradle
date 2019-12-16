@@ -1,0 +1,3 @@
+include ':basecleanarchitecture'
+include ':app'
+rootProject.name = "Weather Photo"

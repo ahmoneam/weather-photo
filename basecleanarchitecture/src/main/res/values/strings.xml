@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name" translatable="false">Base Clean Architecture</string>
+    <string name="error_required">There\'s an empty field that is required</string>
+    <string name="error_email_invalid">Please enter a valid email address</string>
+    <string name="error_phone_invalid">Please enter right saudi mobile number.</string>
+    <string name="error_password_invalid">You\'ve entered a weak password; Please enter at least 8 characters with at least 1 digit and 1 letter.</string>
+    <string name="error_confirm_password_mismatch">Password mismatch; Please reenter your passwords carefully</string>
+    <string name="error_no_internet_connection">No Internet Connection</string>
+    <string name="error_name_invalid">Your name is too short; Please edit it</string>
+</resources>
