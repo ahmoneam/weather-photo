@@ -34,4 +34,14 @@ class WeatherRepository(localDataSource: ILocalDataSource, remoteDataSource: IRe
             }
         }
     }
+
+    override suspend fun getPhotos(): Result<List<String>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Result.Success(localDataSource.getPhotos())
+            } catch (error: Throwable) {
+                unexpectedError(error)
+            }
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package com.moneam.weatherphoto.feature.photo
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
@@ -14,6 +13,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ahmoneam.basecleanarchitecture.base.platform.BaseFragment
 import com.ahmoneam.basecleanarchitecture.utils.EventObserver
+import com.ahmoneam.basecleanarchitecture.utils.shareImageUri
 import com.birjuvachhani.locus.Locus
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.common.ConnectionResult
@@ -120,17 +120,9 @@ class PhotoFragment : BaseFragment<PhotoViewModel>() {
             val uri = getImageUri(bitmap)
             uri?.let {
                 viewModel.onShareImageClick(uri.toString())
-                shareImageUri(it)
+                requireActivity().shareImageUri(it)
             }
         }
-    }
-
-    private fun shareImageUri(uri: Uri) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.putExtra(Intent.EXTRA_STREAM, uri)
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        intent.type = "image/jpg"
-        startActivity(intent)
     }
 
     private fun getImageUri(inImage: Bitmap): Uri? {
