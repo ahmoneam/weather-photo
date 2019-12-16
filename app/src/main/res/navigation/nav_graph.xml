@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.moneam.weatherphoto.HomeFragment"
+        android:name="com.moneam.weatherphoto.feature.list.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_first" />
 

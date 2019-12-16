@@ -1,6 +1,9 @@
 package com.ahmoneam.basecleanarchitecture.utils
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Rect
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -173,4 +176,12 @@ fun String.toDateWithHoursMinuets24(): Date? {
 
 fun Date.toFormattedTime(): String? {
     return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(this)
+}
+
+fun Context.shareImageUri(uri: Uri) {
+    val intent = Intent(Intent.ACTION_SEND)
+    intent.putExtra(Intent.EXTRA_STREAM, uri)
+    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    intent.type = "image/jpg"
+    startActivity(intent)
 }

@@ -4,10 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import java.util.*
-import kotlin.reflect.KClass
 
 class SharedPreferencesUtils constructor(
-    private val gson: Gson,
+    override val gson: Gson,
     private val context: Context,
     private val sharedPreferencesName: String
 ) : SharedPreferencesInterface {
@@ -45,15 +44,6 @@ class SharedPreferencesUtils constructor(
 
     override fun getBoolean(key: String): Boolean {
         return mPrefs.getBoolean(key, false)
-    }
-
-    override fun <T> putObject(key: String, value: T) {
-        mPrefs.edit().putString(key, gson.toJson(value)).apply()
-    }
-
-    override fun <T : Any> getObject(key: String, type: KClass<T>): T? {
-        val s = mPrefs.getString(key, null) ?: return null
-        return gson.fromJson(s, type.java)
     }
 
     override fun clearData() {

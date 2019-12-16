@@ -7,4 +7,5 @@ import com.moneam.weatherphoto.module.weather.domain.Weather
 interface IWeatherRepository : IBaseRepository {
     suspend fun getWeather(lat: String, lng: String): Result<Weather>
     suspend fun saveWeatherImage(weatherImage: String): Result<String>
+    suspend fun getPhotos(): Result<List<String>>
 }
